@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.css';
-import {LoginPage}  from './pages/LoginPage';
-function App() {
-  return (
-    <div className="App">
-      <LoginPage></LoginPage>
-    </div>
-  );
-}
+import { LoginPage } from './pages/LoginPage';
+import {
+  createBrowserRouter,
+} from "react-router-dom";
 
-export default App;
+export const router = createBrowserRouter(
+  [{
+    path: "/",
+    element: <LoginPage />
+  }]
+
+);
+
