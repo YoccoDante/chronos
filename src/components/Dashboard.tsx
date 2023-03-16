@@ -14,6 +14,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems, secondaryListItems } from "./listItems";
 import { Logout } from '@mui/icons-material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 
 const drawerWidth: number = 240;
@@ -69,10 +71,20 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 function DashboardComponet() {
-  const [open, setOpen] = React.useState(true);
+  const navigate = useNavigate();
+
+  const [open, setOpen] = useState(true);
+  const [authenticated, setauthenticated] = useState(Boolean(localStorage.getItem("authenticated")));
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  const logout = () => {
+    setauthenticated(false);
+    localStorage.setItem("authenticated", "false");
+    navigate("/login");
+  }
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -105,7 +117,7 @@ function DashboardComponet() {
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
+            <IconButton onClick= {logout} color="inherit">
                 <Logout />
             </IconButton>
           </Toolbar>
