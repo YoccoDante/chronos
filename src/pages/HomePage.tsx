@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router";
-import { BasicPage } from "../components/BasicPage";
+import Dashboard from "../components/Dashboard";
 
 export const HomePage = () => {
     const [authenticated, setauthenticated] = useState(Boolean(localStorage.getItem("authenticated")));
@@ -16,7 +16,7 @@ export const HomePage = () => {
         return <Navigate replace to= "/login" />
 
     } else {
-        return <BasicPage title="Home Page"></BasicPage>
+        return <Dashboard/>
 
     }
 }               

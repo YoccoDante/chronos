@@ -5,7 +5,8 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
+import Alert from "@mui/material/Alert";
 
 
 export const LoginPage = () => {
@@ -76,6 +77,7 @@ export const LoginPage = () => {
                         Login In
                     </Button>
                 </Box>
+                <Alert severity="warning">user: Pedro  password: 123</Alert>
             </Box>
         </Container>
     );
