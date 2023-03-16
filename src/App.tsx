@@ -4,12 +4,17 @@ import { LoginPage } from './pages/LoginPage';
 import {
   createBrowserRouter,
 } from "react-router-dom";
+import { HomePage } from './pages/HomePage';
 
 export const router = createBrowserRouter(
   [{
-    path: "/",
+    path: "/login",
     element: <LoginPage />
-  }]
-
+  },
+  {
+    path: "/home-page",
+    element: <HomePage />
+  }
+]
 );
 
