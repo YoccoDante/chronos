@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import Alert from "@mui/material/Alert";
 import AuthService from "../services/auth/AuthService";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../reducers/authSlice";
 
 
@@ -28,20 +28,12 @@ export const LoginPage = () => {
     function handleSubmit(e: any) {
         e.preventDefault();
 
-
-        AuthService.login({ username: username, password: password }).then(
-            () => {
-                dispatch(login({toke:"username"}))
+        AuthService.login({ username: username, password: password })
+            .then(data => {
+                dispatch(login(data));
                 navigate("/home-page");
-
-            },
-            error => {
-                setauthenticated(false);
-
             }
-        );
-
-
+            )
     }
 
     return (

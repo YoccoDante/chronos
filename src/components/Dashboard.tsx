@@ -16,6 +16,8 @@ import { mainListItems, secondaryListItems } from "./listItems";
 import { Logout } from '@mui/icons-material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { logout as authLogout} from "../reducers/authSlice";
 
 
 const drawerWidth: number = 240;
@@ -72,6 +74,7 @@ const mdTheme = createTheme();
 
 function DashboardComponet() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [open, setOpen] = useState(true);
   const [authenticated, setauthenticated] = useState(Boolean(localStorage.getItem("authenticated")));
@@ -83,6 +86,9 @@ function DashboardComponet() {
   const logout = () => {
     setauthenticated(false);
     localStorage.setItem("authenticated", "false");
+    const data = {};
+    dispatch(authLogout(data));
+
     navigate("/login");
   }
 

@@ -16,7 +16,7 @@ class AuthService {
 
   async login(loginRequest: LoginRequest) {
     try {
-      const { data, status } = await axios
+      const { data } = await axios
         .post<LoginResponse>(API_URL + "/login",
           loginRequest,
           {

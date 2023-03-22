@@ -4,8 +4,8 @@ export const counterSlice = createSlice({
     name: 'counter',
     initialState: {
         value: {
-            token: '',
-            username: ''
+            isAuthenticated: false,
+            user: {}
         },
     },
     reducers: {
@@ -14,13 +14,16 @@ export const counterSlice = createSlice({
             // doesn't actually mutate the state because it uses the Immer library,
             // which detects changes to a "draft state" and produces a brand new
             // immutable state based off those changes
-            state.value = action.payload
+            state.value = { isAuthenticated: true, user: action.payload }
         },
+        logout: (state, action) => {
+            state.value = { isAuthenticated: false, user: {} }
+        }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { login } = counterSlice.actions;
+export const { login, logout} = counterSlice.actions;
 
 export const selectCount = (state: any) => state.counter.value
 
