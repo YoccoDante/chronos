@@ -8,6 +8,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import Alert from "@mui/material/Alert";
 import AuthService from "../services/auth/AuthService";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../reducers/authSlice";
+
 
 
 
@@ -19,13 +22,16 @@ export const LoginPage = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [authenticated, setauthenticated] = useState(Boolean(localStorage.getItem("authenticated")));
-    const users = [{ username: "Pedro", password: "123" }];
+    const dispatch = useDispatch();
+
 
     function handleSubmit(e: any) {
         e.preventDefault();
 
+
         AuthService.login({ username: username, password: password }).then(
             () => {
+                dispatch(login({toke:"username"}))
                 navigate("/home-page");
 
             },
@@ -34,6 +40,7 @@ export const LoginPage = () => {
 
             }
         );
+
 
     }
 
