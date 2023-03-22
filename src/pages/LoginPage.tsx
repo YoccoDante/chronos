@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Alert from "@mui/material/Alert";
+import AuthService from "../services/auth/AuthService";
+
 
 
 export const LoginPage = () => {
@@ -21,12 +23,18 @@ export const LoginPage = () => {
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        const account = users.find(u => u.username === username);
-        if (account && account.password === password) {
-            setauthenticated(true);
-            localStorage.setItem("authenticated", "true");
-            navigate("/home-page");
-        }
+
+        AuthService.login({ username: username, password: password }).then(
+            () => {
+                navigate("/home-page");
+
+            },
+            error => {
+                setauthenticated(false);
+
+            }
+        );
+
     }
 
     return (
@@ -45,7 +53,7 @@ export const LoginPage = () => {
                     Log In
                 </Typography>
                 <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}
->
+                >
                     <TextField
                         margin="normal"
                         required
@@ -55,7 +63,7 @@ export const LoginPage = () => {
                         name="email"
                         autoComplete="email"
                         autoFocus
-                        onChange={ (e)=> setUsername(e.target.value)}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
                     <TextField
                         margin="normal"
@@ -66,7 +74,7 @@ export const LoginPage = () => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
-                        onChange={ (e)=> setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     <Button
                         type="submit"
