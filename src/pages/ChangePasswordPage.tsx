@@ -1,42 +1,35 @@
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Alert from "@mui/material/Alert";
-import AuthService from "../services/auth/AuthService";
+import RestorePasswordService from "../services/auth/RestorePasswordService";
 import { useDispatch } from "react-redux";
 import { login } from "../reducers/authSlice";
 
-
-
-
-export const LoginPage = () => {
-
+export const ChangePaswordPage = () => {
 
     const navigate = useNavigate();
 
-    const [username, setUsername] = useState("");
+    const [username, setUsername] = useState("Pedro");
     const [password, setPassword] = useState("");
-    const [authenticated, setauthenticated] = useState(Boolean(localStorage.getItem("authenticated")));
-    const dispatch = useDispatch();
+    const [newpassword, setNewPassword] = useState("");
+    const [confirmnewpassword, setConfirmNewPassword] = useState("");
 
+    const dispatch = useDispatch();
 
     function handleSubmit(e: any) {
         e.preventDefault();
 
-        AuthService.login({ username: username, password: password })
+        RestorePasswordService.restore({ username: username, newpassword: newpassword, confirmnewpassword: confirmnewpassword})
             .then(data => {
                 dispatch(login(data));
-                navigate("/home-page");
+                navigate("/login");
             }
-            )
-    }
-    function clickForgotPassword() {
-        navigate("/login/restore");
+        )
     }
 
     return (
@@ -49,10 +42,8 @@ export const LoginPage = () => {
                     alignItems: "center"
                 }}
             >
-                <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
-                </Avatar>
                 <Typography component="h1" variant="h5">
-                    Log In
+                    Change Password
                 </Typography>
                 <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}
                 >
@@ -60,23 +51,22 @@ export const LoginPage = () => {
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
+                        id="new-password"
+                        label="New Password"
+                        name="new-password"
+                        autoComplete="new-password"
                         autoFocus
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={(e) => setNewPassword(e.target.value)}
                     />
                     <TextField
                         margin="normal"
                         required
                         fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        onChange={(e) => setPassword(e.target.value)}
+                        id="confirm-password"
+                        label="Confirm Password"
+                        name="confirm-password"
+                        autoComplete="confirm-password"
+                        onChange={(e) => setConfirmNewPassword(e.target.value)}
                     />
                     <Button
                         type="submit"
@@ -84,18 +74,10 @@ export const LoginPage = () => {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Login In
-                    </Button>
-                    <Button
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                        onClick={clickForgotPassword}
-                    >
-                        Forgot Password
+                        Change Password
                     </Button>
                 </Box>
-                <Alert severity="warning">user: Pedro  password: 123</Alert>
+                <Alert severity="warning">user: Pedro</Alert>
             </Box>
         </Container>
     );
