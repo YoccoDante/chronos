@@ -5,6 +5,8 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 import { HomePage } from './pages/HomePage';
+import { RestorePaswordPage } from './pages/RestorePasswordPage';
+import { ChangePaswordPage } from './pages/ChangePasswordPage';
 
 export const router = createBrowserRouter(
   [{
@@ -18,6 +20,14 @@ export const router = createBrowserRouter(
   {
     path: "/home-page",
     element: <HomePage />
+  },
+  {
+    path: "/login/restore",
+    element: <RestorePaswordPage />
+  },
+  {
+    path: "/login/change-password",
+    element: <ChangePaswordPage />
   }
 ]
 );
