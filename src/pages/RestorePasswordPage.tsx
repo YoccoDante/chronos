@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Alert from "@mui/material/Alert";
+import RestorePasswordService from "../services/auth/RestorePasswordService";
 
 export const RestorePaswordPage = () => {
 
@@ -14,7 +15,15 @@ export const RestorePaswordPage = () => {
     const [username, setUsername] = useState("");
 
     function handleSubmit(e: any) {
-        navigate("/login/change-password");
+        e.preventDefault();
+
+        RestorePasswordService.forgot({ email_address: username })
+            .then(data => {
+                const forgotenToken = localStorage.getItem("forgotenToken");
+                if (forgotenToken) {
+                    navigate("/login/change-password");
+                }
+            });
     }
 
     return (

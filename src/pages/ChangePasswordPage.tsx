@@ -24,9 +24,8 @@ export const ChangePaswordPage = () => {
     function handleSubmit(e: any) {
         e.preventDefault();
 
-        RestorePasswordService.restore({ username: username, newpassword: newpassword, confirmnewpassword: confirmnewpassword})
+        RestorePasswordService.reset({ username: username, new_password: newpassword, new_password2: confirmnewpassword})
             .then(data => {
-                dispatch(login(data));
                 navigate("/login");
             }
         )
@@ -55,6 +54,7 @@ export const ChangePaswordPage = () => {
                         label="New Password"
                         name="new-password"
                         autoComplete="new-password"
+                        type="password"
                         autoFocus
                         onChange={(e) => setNewPassword(e.target.value)}
                     />
@@ -65,6 +65,7 @@ export const ChangePaswordPage = () => {
                         id="confirm-password"
                         label="Confirm Password"
                         name="confirm-password"
+                        type="password"
                         autoComplete="confirm-password"
                         onChange={(e) => setConfirmNewPassword(e.target.value)}
                     />
