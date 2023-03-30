@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/auth";
+const API_URL = "http://ff69eef5-3875-48ae-8448-47b076427a39.mock.pstmn.io/auth";
 
 type LoginRequest = {
   username: string,
@@ -26,9 +26,6 @@ class AuthService {
             }
           }
         );
-      if (data.token) {
-        localStorage.setItem("authenticated", "true");
-      }
       return data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
