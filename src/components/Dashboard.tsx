@@ -13,6 +13,7 @@ import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems, secondaryListItems } from "./listItems";
+import Menu from './Menu';
 import { Logout } from '@mui/icons-material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -146,6 +147,8 @@ function DashboardComponet() {
             {mainListItems}
             <Divider sx={{ my: 1 }} />
             {secondaryListItems}
+            <Divider sx={{ my: 1 }} />
+            <Menu/>
           </List>
         </Drawer>
         <Box

@@ -7,6 +7,7 @@ import {
 import { HomePage } from './pages/HomePage';
 import { RestorePaswordPage } from './pages/RestorePasswordPage';
 import { ChangePaswordPage } from './pages/ChangePasswordPage';
+import Products from './pages/Products';
 
 export const router = createBrowserRouter(
   [{
@@ -28,6 +29,10 @@ export const router = createBrowserRouter(
   {
     path: "/login/change-password",
     element: <ChangePaswordPage />
+  },
+  {
+    path: "/products",
+    element: <Products />
   }
 ]
 );
